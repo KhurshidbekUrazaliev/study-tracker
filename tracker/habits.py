@@ -3,11 +3,12 @@ from tracker.storage import load_data, save_data
 
 # Define our habits
 HABITS = [
-    "Python study",
-    "Korean study",
-    "Quran memorization",
-    "Reading",
-    "Exercise"
+    "Programming",
+    "Language learning",
+    "Qur'an reading",
+    "Reading books",
+    "Workout",
+    "Capital"
 ]
 
 def log_completion(habit_name, date=None):
