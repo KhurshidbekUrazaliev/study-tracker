@@ -1,5 +1,7 @@
 # Smart Study & Discipline Tracker
 
+![Tests](https://github.com/KhurshidbekUrazaliev/study-tracker/workflows/Tests/badge.svg)
+
 A Python-based CLI application to track daily study habits, calculate streaks, and generate weekly progress summaries.
 
 ## Why This Project Exists
