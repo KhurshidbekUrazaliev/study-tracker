@@ -61,12 +61,51 @@ def cmd_status():
     print(f"\n📊 Completed today: {total_completed}/{len(HABITS)}")
     print()
 
+def cmd_summary():
+    """Show weekly summary."""
+    from tracker.stats import get_weekly_summary, get_total_completions_this_week, get_best_habit
+    
+    print_banner()
+    print("📊 WEEKLY SUMMARY (Last 7 Days)\n")
+    
+    summary = get_weekly_summary()
+    
+    print("COMPLETION RATES:")
+    print("-" * 50)
+    
+    for habit in HABITS:
+        stats = summary[habit]
+        count = stats["completed_days"]
+        rate = stats["completion_rate"]
+        
+        # Visual bar
+        bar_length = int(rate / 10)
+        bar = "█" * bar_length + "░" * (10 - bar_length)
+        
+        print(f"{habit:25} {bar} {count}/7 ({rate:.0f}%)")
+    
+    print("-" * 50)
+    
+    total = get_total_completions_this_week()
+    possible = len(HABITS) * 7
+    overall_rate = (total / possible) * 100
+    
+    print(f"\n📈 Total completions: {total}/{possible} ({overall_rate:.0f}%)")
+    
+    best = get_best_habit()
+    if best:
+        habit_name, count = best
+        print(f"🏆 Best habit: {habit_name} ({count} days)")
+    
+    print()
+
 def cmd_help():
     """Show help message."""
     print_banner()
     print("USAGE:")
     print("  python main.py log <habit>    Log a habit completion")
     print("  python main.py status         Show all habits and streaks")
+    print("  python main.py summary        Show weekly summary")
     print("  python main.py help           Show this help message")
     print("\nAVAILABLE HABITS:")
     for habit in HABITS:
@@ -90,6 +129,9 @@ def main():
     
     elif command == "status":
         cmd_status()
+    
+    elif command == "summary":
+        cmd_summary()
     
     elif command == "help":
         cmd_help()
