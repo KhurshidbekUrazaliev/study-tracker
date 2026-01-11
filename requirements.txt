@@ -1,0 +1,1 @@
+echo "pytest>=7.0.0" > requirements.txt
